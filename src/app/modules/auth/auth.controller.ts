@@ -19,7 +19,7 @@ const userLogin = catchAsync(async (req, res, next) => {
 
 const userRegister = catchAsync(async (req, res, next) => {
   const payload = {
-    ...JSON.parse(req?.body?.data),
+    ...req.body,
     photo: req?.file?.path,
   };
   const result = await authServices.userRegister(payload);
