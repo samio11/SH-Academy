@@ -1,4 +1,13 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -10,7 +19,8 @@ const HandleDuplicateError_1 = require("../errors/HandleDuplicateError");
 const HandleCastError_1 = require("../errors/HandleCastError");
 const HandleValidationError_1 = require("../errors/HandleValidationError");
 const HandleZodError_1 = require("../errors/HandleZodError");
-const GlobalErrorHandler = (err, req, res, next) => {
+const cloudinary_config_1 = require("../config/cloudinary.config");
+const GlobalErrorHandler = (err, req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     let statusCode = 500;
     let message = "Error Occurs";
     let errorSources = [
@@ -19,6 +29,9 @@ const GlobalErrorHandler = (err, req, res, next) => {
             message: "Opps! Error Occurs",
         },
     ];
+    if (req.file) {
+        yield (0, cloudinary_config_1.deleteImageFromCloudinary)(req.file.path);
+    }
     if ((err === null || err === void 0 ? void 0 : err.code) === 11000) {
         const x = (0, HandleDuplicateError_1.handleDuplicateError)(err);
         statusCode = x.statusCode;
@@ -68,5 +81,5 @@ const GlobalErrorHandler = (err, req, res, next) => {
         errorSources,
         stack: config_1.default.NODE_ENV === "development" ? err === null || err === void 0 ? void 0 : err.stack : "",
     });
-};
+});
 exports.GlobalErrorHandler = GlobalErrorHandler;

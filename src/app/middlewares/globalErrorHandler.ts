@@ -6,8 +6,9 @@ import { handleDuplicateError } from "../errors/HandleDuplicateError";
 import { handleCastError } from "../errors/HandleCastError";
 import { handleValidationError } from "../errors/HandleValidationError";
 import { handleZodError } from "../errors/HandleZodError";
+import { deleteImageFromCloudinary } from "../config/cloudinary.config";
 
-export const GlobalErrorHandler = (
+export const GlobalErrorHandler = async (
   err: any,
   req: Request,
   res: Response,
@@ -21,6 +22,9 @@ export const GlobalErrorHandler = (
       message: "Opps! Error Occurs",
     },
   ];
+  if (req.file) {
+    await deleteImageFromCloudinary(req.file.path);
+  }
 
   if (err?.code === 11000) {
     const x = handleDuplicateError(err);

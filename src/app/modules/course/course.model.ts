@@ -1,0 +1,29 @@
+// models/Course.model.ts
+import { Schema, model } from "mongoose";
+import { ICourse } from "./course.interface";
+
+const CourseSchema = new Schema<ICourse>(
+  {
+    title: { type: String, required: true },
+    description: { type: String, required: true },
+    price: Number,
+    category: { type: String, required: true },
+    syllabus: [{ type: String }],
+    lessons: [
+      {
+        title: { type: String, required: true },
+        videoUrl: { type: String, required: true },
+      },
+    ],
+
+    batches: [
+      {
+        name: { type: String, required: true },
+        startDate: { type: Date, required: true },
+      },
+    ],
+  },
+  { timestamps: true, versionKey: false }
+);
+
+export const Course = model("Course", CourseSchema);
