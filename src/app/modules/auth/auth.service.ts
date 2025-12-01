@@ -1,4 +1,5 @@
 import { AppError } from "../../errors/AppError";
+import { sendEmail } from "../../utils/sendEmail";
 import { createUserToken } from "../../utils/userToken";
 import { IUser } from "../user/user.interface";
 import { User } from "../user/user.model";
@@ -19,6 +20,17 @@ const userRegister = async (payload: IUser) => {
   const existUser = await User.findOne({ email: payload.email });
   if (existUser) throw new AppError(401, "User Is Already Exists");
   const result = await User.create(payload);
+  await sendEmail({
+    to: result.email,
+    subject: "Welcome to SH-Academy 🎓",
+    tempName: "register-success",
+    tempData: {
+      name: result.name,
+      email: result.email,
+      role: result.role,
+      year: new Date().getFullYear(),
+    },
+  });
   return result;
 };
 

@@ -1,5 +1,5 @@
 import { Schema, model } from "mongoose";
-import { IUser } from "./user.interface";
+import { ERole, IUser } from "./user.interface";
 import bcrypt from "bcrypt";
 import config from "../../config";
 
@@ -11,8 +11,8 @@ const UserSchema = new Schema<IUser>(
     photo: { type: String, required: true },
     role: {
       type: String,
-      enum: ["student", "admin"],
-      default: "student",
+      enum: ERole,
+      default: ERole.student,
     },
     isBlocked: { type: Boolean, default: false },
   },

@@ -1,9 +1,13 @@
+export enum ERole {
+  student = "student",
+  admin = "admin",
+}
 export interface IUser {
   _id?: string;
   name: string;
   email: string;
   password: string;
   photo?: string;
-  role: "student" | "admin";
+  role: ERole;
   isBlocked: boolean;
 }
