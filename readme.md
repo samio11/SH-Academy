@@ -135,86 +135,8 @@ The server will start on `http://localhost:5000` (or your configured port)
 
 ## 🔧 Environment Variables
 
-Create a `.env` file in the root directory with the following variables:
-# ================================
-# SERVER CONFIGURATION
-# ================================
-PORT=5000
-NODE_ENV=development
-# NODE_ENV options: development | production | test
+Create a `.env` like .env.example file in the root directory with the following variables:
 
-# ================================
-# DATABASE CONFIGURATION
-# ================================
-# MongoDB Connection String
-# Local MongoDB: mongodb://localhost:27017/database_name
-# MongoDB Atlas: mongodb+srv://username:password@cluster.mongodb.net/database_name?retryWrites=true&w=majority
-DATABASE=mongodb://localhost:27017/sh-academy
-# Or for MongoDB Atlas:
-# DATABASE=mongodb+srv://username:password@cluster.mongodb.net/SH_Academy?retryWrites=true&w=majority&appName=Cluster0
-
-# ================================
-# BCRYPT CONFIGURATION
-# ================================
-# Salt rounds for password hashing (8-12 recommended)
-BCRYPT_SALT=10
-
-# ================================
-# JWT CONFIGURATION
-# ================================
-# Access Token Configuration
-JWT_ACCESS_TOKEN=your_super_secret_access_token_key_here_min_32_chars
-JWT_ACCESS_EXPIRES=1d
-# Expiration options: 1h, 24h, 1d, 7d, 30d
-
-# Refresh Token Configuration
-JWT_REFRESH_TOKEN=your_super_secret_refresh_token_key_here_min_32_chars
-JWT_REFRESH_EXPIRES=30d
-# Recommended: 7d, 30d, 90d
-
-# ================================
-# EMAIL CONFIGURATION (SMTP)
-# ================================
-# Gmail SMTP Settings
-SMTP_HOST=smtp.gmail.com
-SMTP_PORT=465
-# SMTP_PORT options: 465 (SSL) | 587 (TLS)
-
-# Your Gmail Address
-SMTP_USER=your_email@gmail.com
-SMTP_FROM=SH-Academy <noreply@sh-academy.com>
-
-# Gmail App Password (NOT your regular password)
-# Generate at: https://myaccount.google.com/apppasswords
-SMTP_PASS=xxxx xxxx xxxx xxxx
-
-# ================================
-# CLOUDINARY CONFIGURATION
-# ================================
-# Get credentials from: https://cloudinary.com/console
-CLUDINARY_NAME=your_cloud_name
-CLOUDINARY_API_KEY=your_api_key
-CLOUDINARY_API_SECRET=your_api_secret
-
-# ================================
-# REDIS CONFIGURATION
-# ================================
-# Redis Cloud or Local Redis Configuration
-RedisUserName=default
-RedisPassword=your_redis_password
-RedisHost=your_redis_host.redis-cloud.com
-RedisPort=6379
-
-# Local Redis (if using locally instead of cloud)
-# RedisHost=127.0.0.1
-# RedisPort=6379
-# RedisPassword= (leave empty for local)
-
-# ================================
-# FRONTEND CONFIGURATION
-# ================================
-# Frontend URL for CORS and redirects
-FRONTEND_URL=http://localhost:3000
 
 ## 📚 API Documentation
 
@@ -967,3 +889,4 @@ For support, email support@sh-academy.com or open an issue in the repository.
 Made with ❤️ by SH-Academy Team
 
 </div>
+
