@@ -15,6 +15,12 @@ router.post(
 );
 
 router.get(
+  "/all",
+  checkAuth([ERole.admin]),
+  enrollmentController.getAllEnrollmentAdmin
+);
+
+router.get(
   "/student/:studentId",
   checkAuth([...Object.values(ERole)]),
   enrollmentController.getStudentEnrollments

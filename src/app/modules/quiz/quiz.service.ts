@@ -1,6 +1,7 @@
 import { Types } from "mongoose";
 import { AppError } from "../../errors/AppError";
 import { Quiz } from "./quiz.model";
+import { QueryBuilder } from "../../utils/QueryBuilder";
 
 const createQuiz = async (payload: any) => {
   return await Quiz.create(payload);
@@ -8,6 +9,16 @@ const createQuiz = async (payload: any) => {
 
 const getQuiz = async (courseId: string, lessonIndex: number) => {
   return await Quiz.findOne({ course: courseId, lessonIndex });
+};
+
+const getAllQuizAdmin = async (query: Record<string, string>) => {
+  const quizQuery = new QueryBuilder(Quiz.find(), query);
+  const quizData = quizQuery.filter().search([""]).sort().paginate().fields();
+  const [data, meta] = await Promise.all([
+    await quizData.build().populate("course", "title"),
+    await quizData.getMeta(),
+  ]);
+  return { data, meta };
 };
 
 const submitQuiz = async (
@@ -29,4 +40,4 @@ const submitQuiz = async (
   return { score };
 };
 
-export const quizService = { createQuiz, getQuiz, submitQuiz };
+export const quizService = { createQuiz, getQuiz, submitQuiz, getAllQuizAdmin };

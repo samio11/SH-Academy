@@ -19,6 +19,11 @@ router.get(
   checkAuth([...Object.values(ERole)]),
   assignmentController.getAssignment
 );
+router.get(
+  "/all",
+  checkAuth([ERole.admin]),
+  assignmentController.getAllAssignmentAdmin
+);
 
 router.post(
   "/submit/:id",

@@ -8,6 +8,7 @@ import { quizValidation } from "./quiz.validation";
 const router = Router();
 
 router.post("/create", checkAuth([ERole.admin]), quizController.createQuiz);
+router.get("/all", checkAuth([ERole.admin]), quizController.getAllQuizAdmin);
 
 router.get("/", checkAuth([...Object.values(ERole)]), quizController.getQuiz);
 

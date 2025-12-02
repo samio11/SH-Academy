@@ -1,5 +1,6 @@
 import { Enrollment } from "./enrollment.model";
 import { AppError } from "../../errors/AppError";
+import { QueryBuilder } from "../../utils/QueryBuilder";
 
 const enrollStudent = async (payload: any) => {
   const exist = await Enrollment.findOne({
@@ -19,6 +20,24 @@ const getStudentEnrollments = async (studentId: string) => {
 
 const getCourseEnrollments = async (courseId: string) => {
   return await Enrollment.find({ course: courseId }).populate("student");
+};
+
+const getAllEnrollmentAdmin = async (query: Record<string, string>) => {
+  const enrollmentQuery = new QueryBuilder(Enrollment.find(), query);
+  const enrollmentData = enrollmentQuery
+    .filter()
+    .search([""])
+    .sort()
+    .paginate()
+    .fields();
+  const [data, meta] = await Promise.all([
+    await enrollmentData
+      .build()
+      .populate("student", "name email")
+      .populate("course", "title category"),
+    await enrollmentData.getMeta(),
+  ]);
+  return { data, meta };
 };
 
 const markLessonComplete = async (
@@ -47,4 +66,5 @@ export const enrollmentService = {
   getStudentEnrollments,
   getCourseEnrollments,
   markLessonComplete,
+  getAllEnrollmentAdmin,
 };

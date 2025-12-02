@@ -25,6 +25,18 @@ const getQuiz = catchAsync(async (req, res) => {
     data: result,
   });
 });
+const getAllQuizAdmin = catchAsync(async (req, res) => {
+  const query = req?.query || "";
+  const result = await quizService.getAllQuizAdmin(
+    query as Record<string, string>
+  );
+  sendResponse(res, {
+    statusCode: 200,
+    message: "Quiz fetched successfully",
+    success: true,
+    data: result,
+  });
+});
 
 const submitQuiz = catchAsync(async (req, res) => {
   const { quizId } = req.params;
@@ -40,4 +52,9 @@ const submitQuiz = catchAsync(async (req, res) => {
   });
 });
 
-export const quizController = { createQuiz, getQuiz, submitQuiz };
+export const quizController = {
+  createQuiz,
+  getQuiz,
+  submitQuiz,
+  getAllQuizAdmin,
+};

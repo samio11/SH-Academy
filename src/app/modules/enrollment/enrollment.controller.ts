@@ -33,6 +33,18 @@ const getCourseEnrollments = catchAsync(async (req, res) => {
     data: result,
   });
 });
+const getAllEnrollmentAdmin = catchAsync(async (req, res) => {
+  const query = req?.query || "";
+  const result = await enrollmentService.getAllEnrollmentAdmin(
+    query as Record<string, string>
+  );
+  sendResponse(res, {
+    statusCode: 200,
+    message: "Course enrollments fetched",
+    success: true,
+    data: result,
+  });
+});
 
 const markLessonComplete = catchAsync(async (req, res) => {
   const { enrollmentId } = req.params;
@@ -56,4 +68,5 @@ export const enrollmentController = {
   getStudentEnrollments,
   getCourseEnrollments,
   markLessonComplete,
+  getAllEnrollmentAdmin,
 };

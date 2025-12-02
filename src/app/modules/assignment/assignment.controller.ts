@@ -25,6 +25,18 @@ const getAssignment = catchAsync(async (req, res) => {
     data: result,
   });
 });
+const getAllAssignmentAdmin = catchAsync(async (req, res) => {
+  const query = req?.query || "";
+  const result = await assignmentService.getAllAssignmentAdmin(
+    query as Record<string, string>
+  );
+  sendResponse(res, {
+    statusCode: 200,
+    message: "Assignment fetched successfully",
+    success: true,
+    data: result,
+  });
+});
 
 const submitAssignment = catchAsync(async (req, res) => {
   const { id } = req.params;
@@ -57,4 +69,5 @@ export const assignmentController = {
   getAssignment,
   submitAssignment,
   reviewAssignment,
+  getAllAssignmentAdmin,
 };
