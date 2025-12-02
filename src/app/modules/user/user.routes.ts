@@ -2,6 +2,8 @@ import { Router } from "express";
 import { checkAuth } from "../../middlewares/checkAuth";
 import { ERole } from "./user.interface";
 import { userController } from "./user.controller";
+import validateRequest from "../../middlewares/validateRequest";
+import { userValidation } from "./user.validation";
 
 const router = Router();
 
@@ -14,6 +16,7 @@ router.get(
 router.put(
   "/update",
   checkAuth([...Object.values(ERole)]),
+  validateRequest(userValidation.updateUserSchema),
   userController.updateUser
 );
 
