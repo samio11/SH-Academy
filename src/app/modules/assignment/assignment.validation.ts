@@ -6,7 +6,10 @@ const createAssignmentSchema = z.object({
     lessonIndex: z.number().min(0, "Lesson index is required"),
     title: z.string().nonempty("Title is required"),
     instructions: z.string().nonempty("Instructions are required"),
-    deadLine: z.date(),
+    deadLine: z
+      .string()
+      .nonempty("Start date is required")
+      .transform((val) => new Date(val)),
   }),
 });
 

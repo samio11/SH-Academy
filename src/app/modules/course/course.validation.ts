@@ -21,7 +21,10 @@ const createCourseSchema = z.object({
       .array(
         z.object({
           name: z.string().nonempty("Batch name is required"),
-          startDate: z.date(),
+          startDate: z
+            .string()
+            .nonempty("Start date is required")
+            .transform((val) => new Date(val)),
         })
       )
       .optional(),
