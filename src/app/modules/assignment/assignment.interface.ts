@@ -12,6 +12,7 @@ export interface IAssignment {
 
   course: Types.ObjectId;
   lessonIndex: number;
+  deadLine: Date;
 
   title: string;
   instructions: string;

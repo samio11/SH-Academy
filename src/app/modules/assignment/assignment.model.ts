@@ -8,6 +8,7 @@ const AssignmentSchema = new Schema<IAssignment>(
 
     title: { type: String, required: true },
     instructions: { type: String, required: true },
+    deadLine: { type: Date, required: true },
 
     submissions: [
       {
