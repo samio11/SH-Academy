@@ -7,7 +7,9 @@ const CourseSchema = new Schema<ICourse>(
     title: { type: String, required: true },
     description: { type: String, required: true },
     price: Number,
+    instructor: { type: Schema.Types.ObjectId, ref: "User", required: true },
     category: { type: String, required: true },
+    tags: [{ type: String }],
     syllabus: [{ type: String }],
     lessons: [
       {
