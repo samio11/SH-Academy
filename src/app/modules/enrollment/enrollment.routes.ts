@@ -2,12 +2,15 @@ import { Router } from "express";
 import { checkAuth } from "../../middlewares/checkAuth";
 import { ERole } from "../user/user.interface";
 import { enrollmentController } from "./enrollment.controller";
+import validateRequest from "../../middlewares/validateRequest";
+import { enrollmentValidation } from "./enrollment.validation";
 
 const router = Router();
 
 router.post(
   "/enroll",
   checkAuth([ERole.student]),
+  validateRequest(enrollmentValidation.enrollStudentSchema),
   enrollmentController.enrollStudent
 );
 
@@ -26,6 +29,7 @@ router.get(
 router.post(
   "/complete/:enrollmentId",
   checkAuth([ERole.student]),
+  validateRequest(enrollmentValidation.markLessonCompleteSchema),
   enrollmentController.markLessonComplete
 );
 
