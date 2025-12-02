@@ -7,6 +7,7 @@ const AssignmentSchema = new mongoose_1.Schema({
     lessonIndex: { type: Number, required: true },
     title: { type: String, required: true },
     instructions: { type: String, required: true },
+    deadLine: { type: Date, required: true },
     submissions: [
         {
             student: { type: mongoose_1.Schema.Types.ObjectId, ref: "User" },

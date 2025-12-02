@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.User = void 0;
 const mongoose_1 = require("mongoose");
+const user_interface_1 = require("./user.interface");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const config_1 = __importDefault(require("../../config"));
 const UserSchema = new mongoose_1.Schema({
@@ -23,8 +24,8 @@ const UserSchema = new mongoose_1.Schema({
     photo: { type: String, required: true },
     role: {
         type: String,
-        enum: ["student", "admin"],
-        default: "student",
+        enum: user_interface_1.ERole,
+        default: user_interface_1.ERole.student,
     },
     isBlocked: { type: Boolean, default: false },
 }, { timestamps: true, versionKey: false });
