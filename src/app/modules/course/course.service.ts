@@ -15,8 +15,8 @@ const getAllCourses = async (query: Record<string, string>) => {
   );
 
   const courseData = courseQuery
-    .filter()
     .search(["title", "category"])
+    .filter()
     .sort()
     .paginate()
     .fields();

@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.adminStatusRoutes = void 0;
+const express_1 = require("express");
+const checkAuth_1 = require("../../middlewares/checkAuth");
+const user_interface_1 = require("../user/user.interface");
+const adminState_controller_1 = require("./adminState.controller");
+const router = (0, express_1.Router)();
+router.get("/state", (0, checkAuth_1.checkAuth)([user_interface_1.ERole.admin]), adminState_controller_1.adminStatusController.getAdminStats);
+router.get("/enroll", (0, checkAuth_1.checkAuth)([user_interface_1.ERole.admin]), adminState_controller_1.adminStatusController.getEnrollmentTrends);
+router.get("/user", (0, checkAuth_1.checkAuth)([user_interface_1.ERole.admin]), adminState_controller_1.adminStatusController.getUserGrowth);
+exports.adminStatusRoutes = router;

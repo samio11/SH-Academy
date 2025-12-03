@@ -17,13 +17,15 @@ export class QueryBuilder<T> {
   }
 
   search(searchFields: string[]): this {
-    const searchTerm = this?.query?.searchTerm || "";
-    const searchQuery = {
-      $or: searchFields.map((x) => ({
-        [x]: { $regex: searchTerm, $options: "i" },
-      })),
-    };
-    this.modelQuery = this.modelQuery.find(searchQuery);
+    const searchTerm = this?.query?.searchTerm;
+    if (searchTerm) {
+      const searchQuery = {
+        $or: searchFields.map((field) => ({
+          [field]: { $regex: searchTerm, $options: "i" },
+        })),
+      };
+      this.modelQuery = this.modelQuery.find(searchQuery);
+    }
     return this;
   }
 
@@ -36,7 +38,7 @@ export class QueryBuilder<T> {
   paginate(): this {
     const page = Number(this?.query?.page) || 1;
     const limit = Number(this?.query?.limit) || 10;
-    const skip = (page - 1) * limit;
+    const skip = Number((page - 1) * limit);
     this.modelQuery = this.modelQuery.skip(skip).limit(limit);
     return this;
   }

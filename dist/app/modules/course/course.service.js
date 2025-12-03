@@ -20,8 +20,8 @@ const createCourse = (payload) => __awaiter(void 0, void 0, void 0, function* ()
 const getAllCourses = (query) => __awaiter(void 0, void 0, void 0, function* () {
     const courseQuery = new QueryBuilder_1.QueryBuilder(course_model_1.Course.find().populate("instructor"), query);
     const courseData = courseQuery
-        .filter()
         .search(["title", "category"])
+        .filter()
         .sort()
         .paginate()
         .fields();

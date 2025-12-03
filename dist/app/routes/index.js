@@ -8,6 +8,7 @@ const assignment_routes_1 = require("../modules/assignment/assignment.routes");
 const course_routes_1 = require("../modules/course/course.routes");
 const enrollment_routes_1 = require("../modules/enrollment/enrollment.routes");
 const quiz_routes_1 = require("../modules/quiz/quiz.routes");
+const adminStatus_routes_1 = require("../modules/adminState/adminStatus.routes");
 exports.rootRouter = (0, express_1.Router)();
 const moduleRoute = [
     {
@@ -33,6 +34,10 @@ const moduleRoute = [
     {
         path: "/quiz",
         element: quiz_routes_1.quizRoutes,
+    },
+    {
+        path: "/admin",
+        element: adminStatus_routes_1.adminStatusRoutes,
     },
 ];
 moduleRoute.forEach((x) => exports.rootRouter.use(x.path, x.element));

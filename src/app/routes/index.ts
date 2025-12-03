@@ -5,6 +5,7 @@ import { assignmentRoutes } from "../modules/assignment/assignment.routes";
 import { courseRoutes } from "../modules/course/course.routes";
 import { enrollmentRoutes } from "../modules/enrollment/enrollment.routes";
 import { quizRoutes } from "../modules/quiz/quiz.routes";
+import { adminStatusRoutes } from "../modules/adminState/adminStatus.routes";
 
 export const rootRouter = Router();
 
@@ -32,6 +33,10 @@ const moduleRoute = [
   {
     path: "/quiz",
     element: quizRoutes,
+  },
+  {
+    path: "/admin",
+    element: adminStatusRoutes,
   },
 ];
 

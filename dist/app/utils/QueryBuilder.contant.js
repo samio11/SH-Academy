@@ -4,7 +4,7 @@ exports.excludingFields = void 0;
 exports.excludingFields = [
     "searchTerm",
     "sort",
-    "skip",
     "limit",
+    "skip",
     "fields",
 ];
