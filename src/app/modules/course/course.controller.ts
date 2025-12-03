@@ -3,7 +3,11 @@ import { sendResponse } from "../../utils/sendResponse";
 import { courseService } from "./course.service";
 
 const createCourse = catchAsync(async (req, res) => {
-  const result = await courseService.createCourse(req.body);
+  const payload = {
+    ...req?.body,
+    thumbnail: req?.file?.path,
+  };
+  const result = await courseService.createCourse(payload);
   sendResponse(res, {
     statusCode: 201,
     message: "Course Create Done",

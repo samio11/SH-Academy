@@ -9,6 +9,7 @@ const CourseSchema = new Schema<ICourse>(
     price: Number,
     instructor: { type: Schema.Types.ObjectId, ref: "User", required: true },
     category: { type: String, required: true },
+    thumbnail: { type: String },
     tags: [{ type: String }],
     syllabus: [{ type: String }],
     lessons: [

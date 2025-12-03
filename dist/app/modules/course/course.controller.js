@@ -14,7 +14,9 @@ const catchAsync_1 = require("../../utils/catchAsync");
 const sendResponse_1 = require("../../utils/sendResponse");
 const course_service_1 = require("./course.service");
 const createCourse = (0, catchAsync_1.catchAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield course_service_1.courseService.createCourse(req.body);
+    var _a;
+    const payload = Object.assign(Object.assign({}, req === null || req === void 0 ? void 0 : req.body), { thumbnail: (_a = req === null || req === void 0 ? void 0 : req.file) === null || _a === void 0 ? void 0 : _a.path });
+    const result = yield course_service_1.courseService.createCourse(payload);
     (0, sendResponse_1.sendResponse)(res, {
         statusCode: 201,
         message: "Course Create Done",

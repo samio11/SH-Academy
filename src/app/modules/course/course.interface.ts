@@ -17,6 +17,7 @@ export interface ICourse {
   instructor: Types.ObjectId;
   price: number;
   category?: string;
+  thumbnail?: string;
   tags?: string[];
   syllabus?: string[];
   lessons: ICourseLesson[];

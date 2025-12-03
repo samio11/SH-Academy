@@ -4,12 +4,16 @@ import { ERole } from "../user/user.interface";
 import { courseController } from "./course.controller";
 import validateRequest from "../../middlewares/validateRequest";
 import { courseValidation } from "./course.validation";
+import { multerUpload } from "../../config/multer.config";
+import { parseFormData } from "../../middlewares/parseFormData";
 
 const router = Router();
 
 router.post(
   "/create",
   checkAuth([ERole.admin]),
+  multerUpload.single("file"),
+  parseFormData,
   validateRequest(courseValidation.createCourseSchema),
   courseController.createCourse
 );
